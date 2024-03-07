@@ -1,0 +1,17 @@
+name: Pull Request Checks
+run-name: ${{ github.actor}} - ${{ github.event_name }} - ${{ github.sha }}
+on: [push]
+jobs:
+  pr-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v1
+      - name: Install dependencies
+        run: bun install
+      - name: Run tests
+        run: bun run test
+      - name: Run linter
+        run: bun run lint:check
