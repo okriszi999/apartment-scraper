@@ -8,4 +8,5 @@ export default defineNuxtConfig({
     prefix: "",
     componentDir: "./components/ui",
   },
+  // buildDir: "dist",
 });
