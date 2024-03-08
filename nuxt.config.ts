@@ -14,5 +14,8 @@ export default defineNuxtConfig({
     prefix: "",
     componentDir: "./components/ui",
   },
+  colorMode: {
+    classSuffix: "",
+  },
   // buildDir: "dist",
 });
