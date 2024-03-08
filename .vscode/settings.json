@@ -10,5 +10,6 @@
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "github-actions.workflows.pinned.workflows": [".github/workflows/deploy.yml"]
 }
