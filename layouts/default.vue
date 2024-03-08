@@ -14,19 +14,19 @@ import { ref } from "vue";
 import { cn } from "~/lib/utils";
 
 const isOpen = ref(true);
+const route = useRoute();
 const isOpenOpacity = ref(0);
 
-const toggleNav = () => {
-  console.log("hello");
-  isOpen.value = !isOpen.value;
-};
+const toggleNav = () => (isOpen.value = !isOpen.value);
 
-const navItemClass = () => {
-  return cn(
-    "flex items-center  bg-gray-100 hover:bg-gray-200 text-gray-500 hover:text-gray-800 transition rounded-lg",
+const navItemClass = (path: string) =>
+  cn(
+    "flex items-center transition rounded-lg",
+    "hover:bg-primary/5 hover:text-primary/100",
+    "active:bg-primary/15 active:text-primary/100",
     isOpen.value ? "py-2 px-3 justify-between" : "justify-center size-12",
+    route.path === path ? "bg-primary/10 text-primary/90" : "",
   );
-};
 </script>
 
 <template>
@@ -34,7 +34,7 @@ const navItemClass = () => {
     <nav
       :class="
         cn(
-          'bg-gray-100 h-screen px-2 py-6 relative transition shadow-md shadow-gray-300',
+          'bg-card h-screen px-2 py-6 relative transition shadow-md',
           isOpen ? 'w-56' : 'w-16',
           'flex flex-col justify-between',
         )
@@ -46,8 +46,8 @@ const navItemClass = () => {
         name="lucide:chevron-right"
         :class="
           cn(
-            'size-6 cursor-pointer absolute top-8 -right-3 bg-white p-1 rounded-full transition border',
-            'hover:bg-white/50  hover:border-gray-300',
+            'size-6 cursor-pointer absolute top-8 -right-3 bg-card p-1 rounded-full transition border',
+            'hover:bg-primary/5  hover:border-primary hover:text-primary',
             isOpen ? 'rotate-180' : '',
           )
         "
@@ -64,9 +64,9 @@ const navItemClass = () => {
         <ul
           v-for="item in navItems.filter((item) => !item.isBottom)"
           :key="item.path"
-          class="flex flex-col justify-between"
+          class="flex flex-col mb-2 justify-between"
         >
-          <NuxtLink :to="item.path" :class="navItemClass()">
+          <NuxtLink :to="item.path" :class="navItemClass(item.path)">
             <li :class="cn(!isOpen && 'sr-only')">
               {{ item.name }}
             </li>
@@ -81,7 +81,7 @@ const navItemClass = () => {
         :key="item.path"
         class="flex flex-col justify-between"
       >
-        <NuxtLink :to="item.path" :class="navItemClass()">
+        <NuxtLink :to="item.path" :class="navItemClass(item.path)">
           <li :class="cn(!isOpen && 'sr-only')">
             {{ item.name }}
           </li>
@@ -90,7 +90,7 @@ const navItemClass = () => {
         </NuxtLink>
       </ul>
     </nav>
-    <main class="pt-20 px-4">
+    <main class="pt-20 px-4 w-full">
       <slot />
     </main>
   </div>
