@@ -9,13 +9,17 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint:check": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "db:migrate": "bunx drizzle-kit generate:pg",
+    "db:push": "bunx drizzle-kit push:pg"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^0.9.0",
     "@radix-icons/vue": "^1.0.0",
     "@tanstack/vue-query": "^5.25.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "drizzle-orm": "^0.30.1",
     "nuxt": "^3.10.3",
     "radix-vue": "^1.5.0",
     "tailwind-merge": "^2.2.1",
@@ -26,9 +30,11 @@
   },
   "devDependencies": {
     "@nuxt/eslint-config": "^0.2.0",
+    "@nuxt/image": "latest",
     "@nuxtjs/color-mode": "^3.3.2",
     "@nuxtjs/eslint-module": "^4.1.0",
     "@nuxtjs/tailwindcss": "^6.11.4",
+    "drizzle-kit": "^0.20.14",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.1.3",

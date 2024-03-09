@@ -7,7 +7,8 @@
           Scrapers are used to extract data from websites.
         </p>
       </span>
-      <Button variant="outline"> Create Scraper </Button>
+
+      <Button variant="outline" @click="createScraper"> Create Scraper </Button>
     </div>
 
     <div class="space-y-3">
@@ -18,7 +19,7 @@
         </p>
       </div>
 
-      <div>
+      <div v-if="!isLoading && data?.length">
         <div v-if="!isLoading" class="flex flex-1 gap-2">
           <div
             v-for="scraper in data?.scrapers"
@@ -79,12 +80,27 @@
           </div>
         </div>
       </div>
+      <div v-else class="flex items-center justify-evenly">
+        <NuxtImg
+          src="https://static.vecteezy.com/system/resources/previews/003/274/356/large_2x/no-result-search-flat-illustration-vector.jpg"
+          alt="No scrapers"
+          class="size-[500px]"
+        />
+        <div class="space-y-3">
+          <h3>No scrapers found.</h3>
+          <p>
+            You can create a new scraper by clicking the "Create Scraper" button
+            above, or clicking the button below.
+          </p>
+          <Button> Create Scraper </Button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useQuery } from "@tanstack/vue-query";
+import { useMutation, useQuery } from "@tanstack/vue-query";
 import Badge from "~/components/ui/badge/Badge.vue";
 import { cn } from "~/lib/utils";
 import type { ScraperResponse } from "~/server/api/scrapers/index.get";
@@ -95,5 +111,29 @@ const { data, isLoading } = useQuery<ScraperResponse>({
     return await fetch("/api/scrapers").then((res) => res.json());
   },
 });
+
+const mutation = useMutation({
+  mutationKey: ["createScraper"],
+  mutationFn: (body: { name: string; url: string; tags: string[] }) => {
+    return fetch("/api/scrapers", {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => res.json());
+  },
+});
+
+const createScraper = async () => {
+  const body = {
+    name: "New Scraper",
+    url: "https://example.com",
+    tags: ["new", "example"],
+  };
+
+  console.log(body);
+
+  await mutation.mutateAsync(body);
+};
 </script>
-~/server/api/scrapers.get~/server/api/scrapers/index.get

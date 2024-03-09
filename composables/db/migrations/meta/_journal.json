@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1709912190995,
+      "tag": "0000_lowly_sabretooth",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1709914466111,
+      "tag": "0001_bored_romulus",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1709929962726,
+      "tag": "0002_curved_tarot",
+      "breakpoints": true
+    }
+  ]
+}

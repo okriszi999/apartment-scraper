@@ -1,0 +1,1 @@
+ALTER TABLE "scraper_tag" ALTER COLUMN "scraper_id" SET NOT NULL;

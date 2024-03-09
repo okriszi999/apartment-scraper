@@ -1,3 +1,5 @@
+import { db } from "~/composables/db";
+import { scraper } from "~/composables/db/schemas/scraper";
 export default defineEventHandler(async () => {
   const scrapers = await getScrapers();
   return {
@@ -15,35 +17,9 @@ export type ScraperResponse = {
   length: number;
 };
 
-function getScrapers() {
-  return new Promise<typeof scrapers>((resolve) => {
-    setTimeout(() => {
-      return resolve(scrapers);
-    }, 2500);
-  });
-}
+async function getScrapers() {
+  const scrapers = await db.select().from(scraper);
 
-const scrapers = [
-  {
-    name: "ingatlan.com",
-    tags: [
-      "I. district",
-      "II. district",
-      "IV. district",
-      "V. district",
-      "VI. district",
-      "XVII. district",
-    ],
-    url: "https://www.ingatlan.com/",
-  },
-  {
-    name: "otthonterkep.hu",
-    tags: ["I. district", "II. district", "III. district", "IV. district"],
-    url: "https://otthonterkep.hu/",
-  },
-  {
-    name: "jofogas.hu",
-    tags: ["I. district", "II. district", "III. district", "IV. district"],
-    url: "https://www.jofogas.hu/",
-  },
-];
+  console.log(`Scrapers: ${JSON.stringify(scrapers)}`);
+  return scrapers;
+}
