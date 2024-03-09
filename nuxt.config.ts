@@ -8,6 +8,7 @@ export default defineNuxtConfig({
     "shadcn-nuxt",
     "@nuxtjs/eslint-module",
     "nuxt-icon",
+    "@nuxt/image",
   ],
   css: ["@/assets/css/tailwind.css"],
   shadcn: {

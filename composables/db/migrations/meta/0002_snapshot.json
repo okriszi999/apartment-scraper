@@ -1,0 +1,85 @@
+{
+  "id": "72ecfe0e-10b7-4e10-ad3e-fb4eb2febc19",
+  "prevId": "08133df8-4c14-45d0-b1ec-0cc4ed32d300",
+  "version": "5",
+  "dialect": "pg",
+  "tables": {
+    "scraper": {
+      "name": "scraper",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "url": {
+          "name": "url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "scraper_tag": {
+      "name": "scraper_tag",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "scraper_id": {
+          "name": "scraper_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "scraper_tag_scraper_id_scraper_id_fk": {
+          "name": "scraper_tag_scraper_id_scraper_id_fk",
+          "tableFrom": "scraper_tag",
+          "tableTo": "scraper",
+          "columnsFrom": [
+            "scraper_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
